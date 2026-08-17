@@ -356,7 +356,7 @@ function App() {
                 `}
               >
                 {date && (
-                  <span className={`font-bold text-sm md:text-base ${isSat ? "text-blue-600" : isSun ? "text-red-600" : "text-brown-dark"}`}>
+                  <span className={`font-bold text-sm md:text-base transition-opacity ${isSat ? "text-blue-600" : isSun ? "text-red-600" : "text-brown-dark"} ${content ? "opacity-20" : ""}`}>
                     {date}
                   </span>
                 )}
