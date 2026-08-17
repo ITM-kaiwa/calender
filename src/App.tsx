@@ -238,7 +238,7 @@ function App() {
               title={t.lastYear}
             >
               {"<<"}
-              {mode === "SPECIFIC_DAY" && <span className="absolute -top-8 left-0 bg-brown text-cream text-xs p-1 rounded whitespace-nowrap">{t.lastYear}</span>}
+              {mode === "SPECIFIC_DAY" && <span className="absolute -top-10 left-0 bg-brown text-cream text-[10px] md:text-xs p-1 rounded whitespace-pre-wrap text-center leading-tight z-20">{t.lastYear}</span>}
             </button>
             <span className="text-lg font-bold text-brown-dark">{year}{lang === "EN" ? "" : t.year}</span>
             <button 
@@ -247,7 +247,7 @@ function App() {
               title={t.nextYear}
             >
               {">>"}
-              {mode === "SPECIFIC_DAY" && <span className="absolute -top-8 right-0 bg-brown text-cream text-xs p-1 rounded whitespace-nowrap">{t.nextYear}</span>}
+              {mode === "SPECIFIC_DAY" && <span className="absolute -top-10 right-0 bg-brown text-cream text-[10px] md:text-xs p-1 rounded whitespace-pre-wrap text-center leading-tight z-20">{t.nextYear}</span>}
             </button>
           </div>
 
@@ -266,7 +266,7 @@ function App() {
               title={t.lastMonth}
             >
               {"<"}
-              {mode === "SPECIFIC_DAY" && <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-brown-dark text-cream text-xs p-1 rounded whitespace-nowrap">{t.lastMonth}</span>}
+              {mode === "SPECIFIC_DAY" && <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-brown-dark text-cream text-[10px] md:text-xs p-1 rounded whitespace-pre-wrap text-center leading-tight z-20">{t.lastMonth}</span>}
             </button>
             <span className="text-xl font-bold w-auto px-2 text-center">{lang === "EN" ? t.monthNames[month] : `${month + 1}${t.month}`}</span>
             <button 
@@ -275,7 +275,7 @@ function App() {
               title={t.nextMonth}
             >
               {">"}
-              {mode === "SPECIFIC_DAY" && <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-brown-dark text-cream text-xs p-1 rounded whitespace-nowrap">{t.nextMonth}</span>}
+              {mode === "SPECIFIC_DAY" && <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-brown-dark text-cream text-[10px] md:text-xs p-1 rounded whitespace-pre-wrap text-center leading-tight z-20">{t.nextMonth}</span>}
             </button>
           </div>
         </div>
