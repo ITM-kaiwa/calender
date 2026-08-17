@@ -303,17 +303,17 @@ function App() {
                 content = fullDayLabels[col];
               } else if (mode === "PRACTICE_DATES" && activeCellIndex === i) {
                 bgClass = "bg-orange-100";
-                content = (lang === "JP" ? `${month + 1}月 ` : ``) + t.dateReadings[date! - 1];
+                content = t.dateReadings[date! - 1];
               } else if (mode === "RANDOM_DAYS" && activeCellIndex === i) {
                 bgClass = "bg-red-100";
                 content = fullDayLabels[col];
               } else if (mode === "RANDOM_DATES" && activeCellIndex === i) {
                 bgClass = "bg-blue-100";
-                content = (lang === "JP" ? `${month + 1}月 ` : ``) + t.dateReadings[date! - 1];
+                content = t.dateReadings[date! - 1];
               } else if (mode === "TIME_ATTACK" && activeCellIndex === i) {
                 bgClass = "bg-yellow-100";
                 if (timeAttackStep === "SHOW") {
-                  content = (lang === "JP" ? `${month + 1}月 ` : ``) + t.dateReadings[date! - 1];
+                  content = t.dateReadings[date! - 1];
                 }
               } else if (mode === "SPECIFIC_DAY") {
                 if (specificText) {
