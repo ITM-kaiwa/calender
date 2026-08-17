@@ -9,6 +9,19 @@ function App() {
   const [lang, setLang] = useState<Language>("VN");
   const [startDay, setStartDay] = useState<"MONDAY" | "SUNDAY">("MONDAY");
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const advancedMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (advancedMenuRef.current && !advancedMenuRef.current.contains(event.target as Node)) {
+        setShowAdvanced(false);
+      }
+    };
+    if (showAdvanced) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showAdvanced]);
   const [currentDate, setCurrentDate] = useState(new Date());
   
   const [mode, setMode] = useState<Mode>("NONE");
@@ -174,7 +187,7 @@ function App() {
       {/* Header */}
       <div className="w-full flex justify-between items-center mb-4 mt-2">
         <h1 className="text-xl font-bold text-brown-dark">Calendar</h1>
-        <div className="relative">
+        <div className="relative" ref={advancedMenuRef}>
           <button 
             onClick={() => setShowAdvanced(!showAdvanced)}
             className="px-3 py-1 bg-brown-light text-cream rounded shadow active:scale-95 transition"
