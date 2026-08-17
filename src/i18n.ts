@@ -1,0 +1,155 @@
+
+export type Language = "JP" | "VN" | "EN" | "CN";
+
+export const translations = {
+  VN: {
+    ui: "Giao diện",
+    advanced: "Nâng cao",
+    startDay: "Bắt đầu vào",
+    monday: "Thứ 2",
+    sunday: "Chủ nhật",
+    practiceDays: "Luyện thứ",
+    practiceDates: "Luyện ngày",
+    randomDays: "Thứ ngẫu nhiên",
+    randomDates: "Ngày ngẫu nhiên",
+    timeAttack: "Thử thách thời gian",
+    specificDay: "Ngày cụ thể",
+    lastMonth: "Tháng trước",
+    nextMonth: "Tháng sau",
+    lastYear: "Năm ngoái",
+    nextYear: "Năm sau",
+    today: "Hôm nay",
+    yesterday: "Hôm qua",
+    dayBeforeYesterday: "Hôm kia",
+    tomorrow: "Ngày mai",
+    dayAfterTomorrow: "Ngày kia",
+    lastWeek: "Tuần trước",
+    nextWeek: "Tuần sau",
+    days: ["T2", "T3", "T4", "T5", "T6", "T7", "CN"],
+    daysSunFirst: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+    daysFull: ["Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy", "Chủ nhật"],
+    daysFullSunFirst: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+    month: "Tháng",
+    year: "Năm",
+    dateReadings: Array.from({length: 31}, (_, i) => `Ngày ${i + 1}`),
+  },
+  JP: {
+    ui: "UI",
+    advanced: "Advanced",
+    startDay: "週の始まり",
+    monday: "月曜日",
+    sunday: "日曜日",
+    practiceDays: "曜日練習",
+    practiceDates: "日付呼び方練習",
+    randomDays: "ランダム曜日練習",
+    randomDates: "ランダム日付練習",
+    timeAttack: "タイムアタック",
+    specificDay: "特定日",
+    lastMonth: "先月",
+    nextMonth: "来月",
+    lastYear: "去年",
+    nextYear: "来年",
+    today: "今日",
+    yesterday: "昨日",
+    dayBeforeYesterday: "一昨日",
+    tomorrow: "明日",
+    dayAfterTomorrow: "明後日",
+    lastWeek: "先週",
+    nextWeek: "来週",
+    days: ["月", "火", "水", "木", "金", "土", "日"],
+    daysSunFirst: ["日", "月", "火", "水", "木", "金", "土"],
+    daysFull: ["げつようび", "かようび", "すいようび", "もくようび", "きんようび", "どようび", "にちようび"],
+    daysFullSunFirst: ["にちようび", "げつようび", "かようび", "すいようび", "もくようび", "きんようび", "どようび"],
+    month: "月",
+    year: "年",
+    dateReadings: [
+      "ついたち", "ふつか", "みっか", "よっか", "いつか", "むいか", "なのか", "ようか", "ここのか", "とおか",
+      "じゅういちにち", "じゅうににち", "じゅうさんにち", "じゅうよっか", "じゅうごにち", "じゅうろくにち", "じゅうしちにち", "じゅうはちにち", "じゅうくにち", "はつか",
+      "にじゅういちにち", "にじゅうににち", "にじゅうさんにち", "にじゅうよっか", "にじゅうごにち", "にじゅうろくにち", "にじゅうしちにち", "にじゅうはちにち", "にじゅうくにち", "さんじゅうにち",
+      "さんじゅういちにち"
+    ],
+  },
+  EN: {
+    ui: "UI",
+    advanced: "Advanced",
+    startDay: "Start Day",
+    monday: "Monday",
+    sunday: "Sunday",
+    practiceDays: "Days Practice",
+    practiceDates: "Dates Practice",
+    randomDays: "Random Days",
+    randomDates: "Random Dates",
+    timeAttack: "Time Attack",
+    specificDay: "Specific Day",
+    lastMonth: "Last Month",
+    nextMonth: "Next Month",
+    lastYear: "Last Year",
+    nextYear: "Next Year",
+    today: "Today",
+    yesterday: "Yesterday",
+    dayBeforeYesterday: "Day before yesterday",
+    tomorrow: "Tomorrow",
+    dayAfterTomorrow: "Day after tomorrow",
+    lastWeek: "Last Week",
+    nextWeek: "Next Week",
+    days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    daysSunFirst: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    daysFull: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    daysFullSunFirst: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    month: "Month",
+    year: "Year",
+    dateReadings: [
+      "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th",
+      "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th", "20th",
+      "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th", "30th",
+      "31st"
+    ],
+  },
+  CN: {
+    ui: "UI",
+    advanced: "Advanced",
+    startDay: "开始日",
+    monday: "星期一 (Xīngqīyī)",
+    sunday: "星期日 (Xīngqīrì)",
+    practiceDays: "星期练习 (Xīngqī liànxí)",
+    practiceDates: "日期练习 (Rìqī liànxí)",
+    randomDays: "随机星期 (Suíjī xīngqī)",
+    randomDates: "随机日期 (Suíjī rìqī)",
+    timeAttack: "计时挑战 (Jìshí tiǎozhàn)",
+    specificDay: "特定日 (Tèdìng rì)",
+    lastMonth: "上个月 (Shàng gè yuè)",
+    nextMonth: "下个月 (Xià gè yuè)",
+    lastYear: "去年 (Qùnián)",
+    nextYear: "明年 (Míngnián)",
+    today: "今天 (Jīntiān)",
+    yesterday: "昨天 (Zuótiān)",
+    dayBeforeYesterday: "前天 (Qiántiān)",
+    tomorrow: "明天 (Míngtiān)",
+    dayAfterTomorrow: "后天 (Hòutiān)",
+    lastWeek: "上周 (Shàng zhōu)",
+    nextWeek: "下周 (Xià zhōu)",
+    days: ["星一", "星二", "星三", "星四", "星五", "星六", "星日"],
+    daysSunFirst: ["星日", "星一", "星二", "星三", "星四", "星五", "星六"],
+    daysFull: ["星期一 (Xīngqīyī)", "星期二 (Xīngqīèr)", "星期三 (Xīngqīsān)", "星期四 (Xīngqīsì)", "星期五 (Xīngqīwǔ)", "星期六 (Xīngqīliù)", "星期日 (Xīngqīrì)"],
+    daysFullSunFirst: ["星期日 (Xīngqīrì)", "星期一 (Xīngqīyī)", "星期二 (Xīngqīèr)", "星期三 (Xīngqīsān)", "星期四 (Xīngqīsì)", "星期五 (Xīngqīwǔ)", "星期六 (Xīngqīliù)"],
+    month: "月",
+    year: "年",
+    dateReadings: Array.from({length: 31}, (_, i) => {
+      const numToZh = (n: number) => {
+        const zh = ["", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+        if (n <= 10) return zh[n];
+        if (n < 20) return "十" + zh[n % 10];
+        if (n % 10 === 0) return zh[Math.floor(n / 10)] + "十";
+        return zh[Math.floor(n / 10)] + "十" + zh[n % 10];
+      };
+      const py = ["", "yī", "èr", "sān", "sì", "wǔ", "liù", "qī", "bā", "jiǔ", "shí"];
+      const getPy = (n: number) => {
+        if (n <= 10) return py[n];
+        if (n < 20) return "shí " + py[n % 10];
+        if (n % 10 === 0) return py[Math.floor(n / 10)] + " shí";
+        return py[Math.floor(n / 10)] + " shí " + py[n % 10];
+      };
+      return `${numToZh(i + 1)}日 (${getPy(i + 1)} rì)`;
+    }),
+  }
+};
