@@ -50,24 +50,25 @@ function App() {
 
   // Time attack logic
   useEffect(() => {
+    let timeout1: number;
+    let timeout2: number;
     if (mode === "TIME_ATTACK" && isTimeAttackRunning) {
-      const pickRandom = () => {
+      const runCycle = () => {
         const randomIndex = firstDayIndex + Math.floor(Math.random() * daysInMonth);
         setActiveCellIndex(randomIndex);
         setTimeAttackStep("WAIT");
         
-        setTimeout(() => {
+        timeout1 = window.setTimeout(() => {
           setTimeAttackStep("SHOW");
+          timeout2 = window.setTimeout(runCycle, 3000);
         }, 2000);
       };
-      
-      pickRandom();
-      timeAttackTimer.current = window.setInterval(pickRandom, 5000);
-      
-      return () => {
-        if (timeAttackTimer.current) clearInterval(timeAttackTimer.current);
-      };
+      runCycle();
     }
+    return () => {
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+    };
   }, [mode, isTimeAttackRunning, firstDayIndex, daysInMonth]);
 
   const handleCellClick = (index: number) => {
@@ -248,7 +249,7 @@ function App() {
               {"<"}
               {mode === "SPECIFIC_DAY" && <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-brown-dark text-cream text-xs p-1 rounded whitespace-nowrap">{t.lastMonth}</span>}
             </button>
-            <span className="text-xl font-bold w-12 text-center">{month + 1}</span>
+            <span className="text-xl font-bold w-16 text-center">{month + 1}{lang === "EN" ? "" : t.month}</span>
             <button 
               onClick={nextMonth} 
               className={`px-3 py-1 bg-brown/10 rounded hover:bg-brown/20 active:scale-95 transition relative ${mode === "SPECIFIC_DAY" ? "bg-brown-dark text-cream" : ""}`}
@@ -343,7 +344,7 @@ function App() {
                 )}
                 {content && (
                   <div className="absolute inset-0 flex items-center justify-center p-1">
-                    <span className="text-[10px] md:text-xs text-center font-semibold leading-tight text-brown">
+                    <span className="text-[10px] md:text-xs text-center font-semibold leading-tight text-brown whitespace-pre-wrap">
                       {content}
                     </span>
                   </div>
