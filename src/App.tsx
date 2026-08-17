@@ -351,7 +351,7 @@ function App() {
               <div 
                 key={i} 
                 onClick={() => handleCellClick(i)}
-                className={`border-r border-b border-brown-light/20 h-16 md:h-20 flex flex-col p-1 relative
+                className={`border-r border-b border-brown-light/20 h-12 md:h-14 flex flex-col p-1 relative
                   ${bgClass} ${isCurrentMonth && (mode === "PRACTICE_DAYS" || mode === "PRACTICE_DATES") ? "cursor-pointer hover:bg-orange-50" : ""}
                 `}
               >
