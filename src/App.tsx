@@ -113,7 +113,7 @@ function App() {
 
   
   const setSpecificDayMode = () => {
-    setMode("SPECIFIC_DAY");
+    setMode(mode === "SPECIFIC_DAY" ? "NONE" : "SPECIFIC_DAY");
   };
 
   const prevMonth = () => {
@@ -188,7 +188,7 @@ function App() {
         <div className="relative" ref={advancedMenuRef}>
           <button 
             onClick={() => setShowAdvanced(!showAdvanced)}
-            className="px-3 py-1 bg-brown-light text-cream rounded shadow active:scale-95 transition"
+            className="px-3 py-1 bg-brown-light text-cream rounded shadow active:translate-y-1 active:shadow-none shadow-[0_4px_0_0_rgba(0,0,0,0.15)] transition-all"
           >
             {t.advanced} ▼
           </button>
@@ -234,7 +234,7 @@ function App() {
           <div className="flex items-center gap-2 relative">
             <button 
               onClick={prevYear} 
-              className={`px-2 py-1 bg-brown/10 rounded hover:bg-brown/20 active:scale-95 transition group ${mode === "SPECIFIC_DAY" ? "bg-brown text-cream" : ""}`}
+              className={`px-2 py-1 bg-brown/10 rounded hover:bg-brown/20 active:translate-y-0.5 active:shadow-none shadow-[0_2px_0_0_rgba(0,0,0,0.15)] transition-all group ${mode === "SPECIFIC_DAY" ? "bg-brown text-cream" : ""}`}
               title={t.lastYear}
             >
               {"<<"}
@@ -243,7 +243,7 @@ function App() {
             <span className="text-lg font-bold text-brown-dark">{year}{lang === "EN" ? "" : t.year}</span>
             <button 
               onClick={nextYear} 
-              className={`px-2 py-1 bg-brown/10 rounded hover:bg-brown/20 active:scale-95 transition group relative ${mode === "SPECIFIC_DAY" ? "bg-brown text-cream" : ""}`}
+              className={`px-2 py-1 bg-brown/10 rounded hover:bg-brown/20 active:translate-y-0.5 active:shadow-none shadow-[0_2px_0_0_rgba(0,0,0,0.15)] transition-all group relative ${mode === "SPECIFIC_DAY" ? "bg-brown text-cream" : ""}`}
               title={t.nextYear}
             >
               {">>"}
@@ -253,7 +253,7 @@ function App() {
 
           <button 
             onClick={setSpecificDayMode}
-            className={`px-3 py-1 mx-2 rounded font-semibold active:scale-95 transition shadow-sm border border-brown-light/30 text-sm whitespace-nowrap
+            className={`px-3 py-1 mx-2 rounded font-semibold active:translate-y-1 active:shadow-none shadow-[0_4px_0_0_rgba(0,0,0,0.15)] transition-all border border-brown-light/30 text-sm whitespace-nowrap
               ${mode === "SPECIFIC_DAY" ? "bg-brown text-white" : "bg-white hover:bg-cream text-brown"}`}
           >
             {t.specificDay}
@@ -262,7 +262,7 @@ function App() {
           <div className="flex items-center gap-3">
              <button 
               onClick={prevMonth} 
-              className={`px-3 py-1 bg-brown/10 rounded hover:bg-brown/20 active:scale-95 transition relative ${mode === "SPECIFIC_DAY" ? "bg-brown-dark text-cream" : ""}`}
+              className={`px-3 py-1 bg-brown/10 rounded hover:bg-brown/20 active:translate-y-0.5 active:shadow-none shadow-[0_2px_0_0_rgba(0,0,0,0.15)] transition-all relative ${mode === "SPECIFIC_DAY" ? "bg-brown-dark text-cream" : ""}`}
               title={t.lastMonth}
             >
               {"<"}
@@ -271,7 +271,7 @@ function App() {
             <span className="text-xl font-bold w-auto px-2 text-center">{lang === "EN" ? t.monthNames[month] : `${month + 1}${t.month}`}</span>
             <button 
               onClick={nextMonth} 
-              className={`px-3 py-1 bg-brown/10 rounded hover:bg-brown/20 active:scale-95 transition relative ${mode === "SPECIFIC_DAY" ? "bg-brown-dark text-cream" : ""}`}
+              className={`px-3 py-1 bg-brown/10 rounded hover:bg-brown/20 active:translate-y-0.5 active:shadow-none shadow-[0_2px_0_0_rgba(0,0,0,0.15)] transition-all relative ${mode === "SPECIFIC_DAY" ? "bg-brown-dark text-cream" : ""}`}
               title={t.nextMonth}
             >
               {">"}
@@ -383,14 +383,14 @@ function App() {
         <div className="grid grid-cols-2 gap-2">
           <button 
             onClick={() => setMode("PRACTICE_DAYS")}
-            className={`py-2 rounded font-semibold active:scale-95 transition shadow-sm border border-brown-light/30
+            className={`py-2 rounded font-semibold active:translate-y-1 active:shadow-none shadow-[0_4px_0_0_rgba(0,0,0,0.15)] transition-all border border-brown-light/30
               ${mode === "PRACTICE_DAYS" ? "bg-brown text-white" : "bg-white hover:bg-cream"}`}
           >
             {t.practiceDays}
           </button>
           <button 
             onClick={() => setMode("PRACTICE_DATES")}
-            className={`py-2 rounded font-semibold active:scale-95 transition shadow-sm border border-brown-light/30
+            className={`py-2 rounded font-semibold active:translate-y-1 active:shadow-none shadow-[0_4px_0_0_rgba(0,0,0,0.15)] transition-all border border-brown-light/30
               ${mode === "PRACTICE_DATES" ? "bg-brown text-white" : "bg-white hover:bg-cream"}`}
           >
             {t.practiceDates}
@@ -399,7 +399,7 @@ function App() {
 
         <button 
           onClick={toggleRandomDays}
-          className={`w-full py-2 border rounded font-semibold active:scale-[0.98] transition shadow-sm
+          className={`w-full py-2 border rounded font-semibold active:translate-y-1 active:shadow-none shadow-[0_4px_0_0_rgba(0,0,0,0.15)] transition-all
             ${mode === "RANDOM_DAYS" && isRandomRunning ? "bg-red-500 text-white border-red-600" : "bg-green-100 hover:bg-green-200 text-green-900 border-green-300"}`}
         >
           {mode === "RANDOM_DAYS" && isRandomRunning ? "Stop" : t.randomDays}
@@ -407,7 +407,7 @@ function App() {
 
         <button 
           onClick={toggleRandomDates}
-          className={`w-full py-2 border rounded font-semibold active:scale-[0.98] transition shadow-sm
+          className={`w-full py-2 border rounded font-semibold active:translate-y-1 active:shadow-none shadow-[0_4px_0_0_rgba(0,0,0,0.15)] transition-all
             ${mode === "RANDOM_DATES" && isRandomRunning ? "bg-red-500 text-white border-red-600" : "bg-orange-100 hover:bg-orange-200 text-orange-900 border-orange-300"}`}
         >
           {mode === "RANDOM_DATES" && isRandomRunning ? "Stop" : t.randomDates}
