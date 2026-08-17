@@ -28,8 +28,8 @@ function App() {
   const [activeCellIndex, setActiveCellIndex] = useState<number | null>(null);
   
   // Time attack state
-  const [isTimeAttackRunning, setIsTimeAttackRunning] = useState(false);
-  const [timeAttackStep, setTimeAttackStep] = useState<"WAIT" | "SHOW">("WAIT");
+  const [isRandomRunning, setIsRandomRunning] = useState(false);
+  const [randomStep, setRandomStep] = useState<"WAIT" | "SHOW">("WAIT");
   const timeAttackTimer = useRef<number | null>(null);
 
   const t = translations[lang];
@@ -57,22 +57,22 @@ function App() {
   // Mode reset
   useEffect(() => {
     setActiveCellIndex(null);
-    setIsTimeAttackRunning(false);
+    setIsRandomRunning(false);
     if (timeAttackTimer.current) clearInterval(timeAttackTimer.current);
   }, [mode, currentDate]);
 
-  // Time attack logic
+  // Random mode auto-cycle logic
   useEffect(() => {
     let timeout1: number;
     let timeout2: number;
-    if (mode === "TIME_ATTACK" && isTimeAttackRunning) {
+    if ((mode === "RANDOM_DAYS" || mode === "RANDOM_DATES") && isRandomRunning) {
       const runCycle = () => {
         const randomIndex = firstDayIndex + Math.floor(Math.random() * daysInMonth);
         setActiveCellIndex(randomIndex);
-        setTimeAttackStep("WAIT");
+        setRandomStep("WAIT");
         
         timeout1 = window.setTimeout(() => {
-          setTimeAttackStep("SHOW");
+          setRandomStep("SHOW");
           timeout2 = window.setTimeout(runCycle, 3000);
         }, 2000);
       };
@@ -82,7 +82,7 @@ function App() {
       clearTimeout(timeout1);
       clearTimeout(timeout2);
     };
-  }, [mode, isTimeAttackRunning, firstDayIndex, daysInMonth]);
+  }, [mode, isRandomRunning, firstDayIndex, daysInMonth]);
 
   const handleCellClick = (index: number) => {
     const isCurrentMonth = index >= firstDayIndex && index < firstDayIndex + daysInMonth;
@@ -93,27 +93,25 @@ function App() {
     }
   };
 
-  const pickRandomDay = () => {
-    setMode("RANDOM_DAYS");
-    const randomIndex = firstDayIndex + Math.floor(Math.random() * daysInMonth);
-    setActiveCellIndex(randomIndex);
-  };
-
-  const pickRandomDate = () => {
-    setMode("RANDOM_DATES");
-    const randomIndex = firstDayIndex + Math.floor(Math.random() * daysInMonth);
-    setActiveCellIndex(randomIndex);
-  };
-
-  const toggleTimeAttack = () => {
-    if (mode !== "TIME_ATTACK") {
-      setMode("TIME_ATTACK");
-      setIsTimeAttackRunning(true);
+  const toggleRandomDays = () => {
+    if (mode !== "RANDOM_DAYS") {
+      setMode("RANDOM_DAYS");
+      setIsRandomRunning(true);
     } else {
-      setIsTimeAttackRunning(!isTimeAttackRunning);
+      setIsRandomRunning(!isRandomRunning);
     }
   };
 
+  const toggleRandomDates = () => {
+    if (mode !== "RANDOM_DATES") {
+      setMode("RANDOM_DATES");
+      setIsRandomRunning(true);
+    } else {
+      setIsRandomRunning(!isRandomRunning);
+    }
+  };
+
+  
   const setSpecificDayMode = () => {
     setMode("SPECIFIC_DAY");
   };
@@ -252,6 +250,14 @@ function App() {
               {mode === "SPECIFIC_DAY" && <span className="absolute -top-8 right-0 bg-brown text-cream text-xs p-1 rounded whitespace-nowrap">{t.nextYear}</span>}
             </button>
           </div>
+
+          <button 
+            onClick={setSpecificDayMode}
+            className={`px-3 py-1 mx-2 rounded font-semibold active:scale-95 transition shadow-sm border border-brown-light/30 text-sm whitespace-nowrap
+              ${mode === "SPECIFIC_DAY" ? "bg-brown text-white" : "bg-white hover:bg-cream text-brown"}`}
+          >
+            {t.specificDay}
+          </button>
           
           <div className="flex items-center gap-3">
              <button 
@@ -319,13 +325,12 @@ function App() {
                 content = t.dateReadings[date! - 1];
               } else if (mode === "RANDOM_DAYS" && activeCellIndex === i) {
                 bgClass = "bg-red-100";
-                content = fullDayLabels[col];
+                if (randomStep === "SHOW") {
+                  content = fullDayLabels[col];
+                }
               } else if (mode === "RANDOM_DATES" && activeCellIndex === i) {
                 bgClass = "bg-blue-100";
-                content = t.dateReadings[date! - 1];
-              } else if (mode === "TIME_ATTACK" && activeCellIndex === i) {
-                bgClass = "bg-yellow-100";
-                if (timeAttackStep === "SHOW") {
+                if (randomStep === "SHOW") {
                   content = t.dateReadings[date! - 1];
                 }
               } else if (mode === "SPECIFIC_DAY") {
@@ -393,33 +398,19 @@ function App() {
         </div>
 
         <button 
-          onClick={pickRandomDay}
-          className="w-full py-2 bg-green-100 hover:bg-green-200 text-green-900 border border-green-300 rounded font-semibold active:scale-[0.98] transition shadow-sm"
-        >
-          {t.randomDays}
-        </button>
-
-        <button 
-          onClick={pickRandomDate}
-          className="w-full py-2 bg-orange-100 hover:bg-orange-200 text-orange-900 border border-orange-300 rounded font-semibold active:scale-[0.98] transition shadow-sm"
-        >
-          {t.randomDates}
-        </button>
-        
-        <button 
-          onClick={toggleTimeAttack}
+          onClick={toggleRandomDays}
           className={`w-full py-2 border rounded font-semibold active:scale-[0.98] transition shadow-sm
-            ${isTimeAttackRunning ? "bg-red-500 text-white border-red-600" : "bg-yellow-100 hover:bg-yellow-200 text-yellow-900 border-yellow-300"}`}
+            ${mode === "RANDOM_DAYS" && isRandomRunning ? "bg-red-500 text-white border-red-600" : "bg-green-100 hover:bg-green-200 text-green-900 border-green-300"}`}
         >
-          {isTimeAttackRunning ? "Stop" : t.timeAttack}
+          {mode === "RANDOM_DAYS" && isRandomRunning ? "Stop" : t.randomDays}
         </button>
 
         <button 
-          onClick={setSpecificDayMode}
-          className={`w-full py-2 rounded font-semibold active:scale-[0.98] transition shadow-sm border border-brown-light/30
-            ${mode === "SPECIFIC_DAY" ? "bg-brown text-white" : "bg-white hover:bg-cream"}`}
+          onClick={toggleRandomDates}
+          className={`w-full py-2 border rounded font-semibold active:scale-[0.98] transition shadow-sm
+            ${mode === "RANDOM_DATES" && isRandomRunning ? "bg-red-500 text-white border-red-600" : "bg-orange-100 hover:bg-orange-200 text-orange-900 border-orange-300"}`}
         >
-          {t.specificDay}
+          {mode === "RANDOM_DATES" && isRandomRunning ? "Stop" : t.randomDates}
         </button>
 
       </div>
