@@ -30,6 +30,7 @@ export const translations = {
     daysFull: ["Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy", "Chủ nhật"],
     daysFullSunFirst: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
     month: "Tháng",
+    monthNames: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
     year: "Năm",
     dateReadings: Array.from({length: 31}, (_, i) => `Ngày ${i + 1}`),
   },
@@ -61,6 +62,7 @@ export const translations = {
     daysFull: ["げつようび", "かようび", "すいようび", "もくようび", "きんようび", "どようび", "にちようび"],
     daysFullSunFirst: ["にちようび", "げつようび", "かようび", "すいようび", "もくようび", "きんようび", "どようび"],
     month: "月",
+    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
     year: "年",
     dateReadings: [
       "ついたち", "ふつか", "みっか", "よっか", "いつか", "むいか", "なのか", "ようか", "ここのか", "とおか",
@@ -97,6 +99,7 @@ export const translations = {
     daysFull: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     daysFullSunFirst: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     month: "Month",
+    monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     year: "Year",
     dateReadings: [
       "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th",
@@ -133,6 +136,7 @@ export const translations = {
     daysFull: ["星期一 (Xīngqīyī)", "星期二 (Xīngqīèr)", "星期三 (Xīngqīsān)", "星期四 (Xīngqīsì)", "星期五 (Xīngqīwǔ)", "星期六 (Xīngqīliù)", "星期日 (Xīngqīrì)"],
     daysFullSunFirst: ["星期日 (Xīngqīrì)", "星期一 (Xīngqīyī)", "星期二 (Xīngqīèr)", "星期三 (Xīngqīsān)", "星期四 (Xīngqīsì)", "星期五 (Xīngqīwǔ)", "星期六 (Xīngqīliù)"],
     month: "月",
+    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
     year: "年",
     dateReadings: Array.from({length: 31}, (_, i) => {
       const numToZh = (n: number) => {

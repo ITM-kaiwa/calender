@@ -262,7 +262,7 @@ function App() {
               {"<"}
               {mode === "SPECIFIC_DAY" && <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-brown-dark text-cream text-xs p-1 rounded whitespace-nowrap">{t.lastMonth}</span>}
             </button>
-            <span className="text-xl font-bold w-16 text-center">{month + 1}{lang === "EN" ? "" : t.month}</span>
+            <span className="text-xl font-bold w-auto px-2 text-center">{lang === "EN" ? t.monthNames[month] : `${month + 1}${t.month}`}</span>
             <button 
               onClick={nextMonth} 
               className={`px-3 py-1 bg-brown/10 rounded hover:bg-brown/20 active:scale-95 transition relative ${mode === "SPECIFIC_DAY" ? "bg-brown-dark text-cream" : ""}`}
