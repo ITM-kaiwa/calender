@@ -361,7 +361,7 @@ function App() {
                   </span>
                 )}
                 {content && (
-                  <div className="absolute inset-0 flex items-center justify-center p-1">
+                  <div className="absolute inset-0 flex items-center justify-center p-1 z-10 pointer-events-none">
                     <span className="text-[10px] md:text-xs text-center font-semibold leading-tight text-brown whitespace-pre-wrap">
                       {content}
                     </span>
