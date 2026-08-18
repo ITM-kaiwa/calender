@@ -110,7 +110,7 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
                   <line 
                     key={`min-${i}`} 
                     x1="50" y1="0" x2="50" y2="6" 
-                    stroke="#111827" strokeWidth="1.5" strokeLinecap="round" 
+                    stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" 
                     transform={`rotate(${i * 6}, 50, 50)`} 
                   />
                 );
