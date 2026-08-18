@@ -170,6 +170,7 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
   const nextWeekD = new Date(todayDate); nextWeekD.setDate(todayDate.getDate() + 7);
 
   const lastWeekRange = getWeekRange(lastWeek);
+  const thisWeekRange = getWeekRange(todayDate);
   const nextWeekRange = getWeekRange(nextWeekD);
 
   const isInRange = (y: number, m: number, d: number, range: {start: Date, end: Date}) => {
@@ -254,20 +255,23 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
           <div className="flex items-center gap-2 relative">
             <button 
               onClick={prevYear} 
-              className={`px-2 py-1 bg-brown/10 rounded hover:bg-brown/20 active:translate-y-0.5 active:shadow-none shadow-[0_2px_0_0_rgba(0,0,0,0.15)] transition-all group ${mode === "SPECIFIC_DAY" ? "bg-brown text-cream" : ""}`}
+              className={`px-2 py-1 bg-brown/10 rounded hover:bg-brown/20 active:translate-y-0.5 active:shadow-none shadow-[0_2px_0_0_rgba(0,0,0,0.15)] transition-all group ${mode === "SPECIFIC_DAY" ? "bg-pink-100 text-brown-dark border border-pink-200" : ""}`}
               title={t.lastYear}
             >
               {"<<"}
-              {mode === "SPECIFIC_DAY" && <span className="absolute -top-10 left-0 bg-brown text-cream text-[10px] md:text-xs p-1 rounded whitespace-pre-wrap text-center leading-tight z-20 w-max">{t.lastYear}</span>}
+              {mode === "SPECIFIC_DAY" && <span className="absolute -top-10 left-0 bg-pink-100 text-brown-dark border border-pink-200 text-[10px] md:text-xs p-1 rounded whitespace-pre-wrap text-center leading-tight z-20 w-max">{t.lastYear}</span>}
             </button>
-            <span className="text-lg font-bold text-brown-dark">{year}{lang === "EN" ? "" : t.year}</span>
+            <div className="relative flex flex-col items-center justify-center">
+              <span className="text-lg font-bold text-brown-dark leading-none mt-1">{year}{lang === "EN" ? "" : t.year}</span>
+              {mode === "SPECIFIC_DAY" && <span className="absolute top-6 bg-pink-100 border border-pink-200 text-brown-dark text-[10px] md:text-xs px-1 rounded whitespace-pre-wrap text-center leading-tight z-20 w-max shadow-sm">{(t as any).thisYear}</span>}
+            </div>
             <button 
               onClick={nextYear} 
-              className={`px-2 py-1 bg-brown/10 rounded hover:bg-brown/20 active:translate-y-0.5 active:shadow-none shadow-[0_2px_0_0_rgba(0,0,0,0.15)] transition-all group relative ${mode === "SPECIFIC_DAY" ? "bg-brown text-cream" : ""}`}
+              className={`px-2 py-1 bg-brown/10 rounded hover:bg-brown/20 active:translate-y-0.5 active:shadow-none shadow-[0_2px_0_0_rgba(0,0,0,0.15)] transition-all group relative ${mode === "SPECIFIC_DAY" ? "bg-pink-100 text-brown-dark border border-pink-200" : ""}`}
               title={t.nextYear}
             >
               {">>"}
-              {mode === "SPECIFIC_DAY" && <span className="absolute -top-10 right-0 bg-brown text-cream text-[10px] md:text-xs p-1 rounded whitespace-pre-wrap text-center leading-tight z-20 w-max">{t.nextYear}</span>}
+              {mode === "SPECIFIC_DAY" && <span className="absolute -top-10 right-0 bg-pink-100 text-brown-dark border border-pink-200 text-[10px] md:text-xs p-1 rounded whitespace-pre-wrap text-center leading-tight z-20 w-max">{t.nextYear}</span>}
             </button>
           </div>
 
@@ -335,6 +339,7 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
             if (isCurrentMonth) {
               const specificText = mode === "SPECIFIC_DAY" ? getSpecificDayText(date!) : null;
               const isLastWeek = mode === "SPECIFIC_DAY" && isInRange(year, month, date!, lastWeekRange);
+              const isThisWeek = mode === "SPECIFIC_DAY" && isInRange(year, month, date!, thisWeekRange);
               const isNextWeek = mode === "SPECIFIC_DAY" && isInRange(year, month, date!, nextWeekRange);
 
               if (mode === "PRACTICE_DAYS" && activeCellIndex === i) {
@@ -360,6 +365,9 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
                 } else if (isLastWeek) {
                   bgClass = "bg-green-300/80";
                   if (col === 3) { showMidText = true; midText = t.lastWeek; } // Center of week
+                } else if (isThisWeek) {
+                  bgClass = "bg-green-200/80";
+                  if (col === 3) { showMidText = true; midText = (t as any).thisWeek || "今週\nこんしゅう"; }
                 } else if (isNextWeek) {
                   bgClass = "bg-green-200/60";
                   if (col === 3) { showMidText = true; midText = t.nextWeek; } // Center of week
