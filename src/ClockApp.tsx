@@ -1,7 +1,7 @@
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getClockReading } from "./clock-logic";
-import { Language } from "./i18n";
+import type { Language } from "./i18n";
 
 interface ClockAppProps {
   onReturn: () => void;
@@ -51,7 +51,7 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
     ampmStr = hours >= 12 ? "PM" : "AM";
   }
   
-  const timeStr = \`\${pad(displayHour)}:\${pad(minutes)}\`;
+  const timeStr = `${pad(displayHour)}:${pad(minutes)}`;
   const readingStr = getClockReading(hours, minutes, lang, is12Hour);
 
   return (
@@ -96,7 +96,7 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
         <div className="flex flex-col gap-4 mt-8 w-full max-w-xs">
           <button
             onClick={toggleRandom}
-            className={\`w-full py-4 rounded-xl font-bold text-xl shadow-[0_6px_0_0_rgba(0,0,0,0.2)] active:translate-y-1.5 active:shadow-none transition-all \${isRandoming ? "bg-red-500 text-white hover:bg-red-600 shadow-[0_6px_0_0_#991b1b]" : "bg-blue-500 text-white hover:bg-blue-600 shadow-[0_6px_0_0_#1e3a8a]"}\`}
+            className={`w-full py-4 rounded-xl font-bold text-xl shadow-[0_6px_0_0_rgba(0,0,0,0.2)] active:translate-y-1.5 active:shadow-none transition-all ${isRandoming ? "bg-red-500 text-white hover:bg-red-600 shadow-[0_6px_0_0_#991b1b]" : "bg-blue-500 text-white hover:bg-blue-600 shadow-[0_6px_0_0_#1e3a8a]"}`}
           >
             {isRandoming ? "Stop" : t[lang].random}
           </button>
