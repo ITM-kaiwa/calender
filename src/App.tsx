@@ -338,7 +338,7 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
             let content = null;
             let showMidText = false;
             let midText = "";
-            let midTextOffset = "";
+            let midTextOffset = "translate-y-5 md:translate-y-6";
 
             if (isCurrentMonth) {
               const specificText = mode === "SPECIFIC_DAY" ? getSpecificDayText(date!) : null;
@@ -368,7 +368,7 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
                   if (col === 3) { showMidText = true; midText = t.lastWeek; }
                 } else if (isThisWeek) {
                   bgClass = "bg-green-300";
-                  if (col === 3) { showMidText = true; midText = (t as any).thisWeek || "今週\nこんしゅう"; midTextOffset = "translate-y-5 md:translate-y-6"; }
+                  if (col === 3) { showMidText = true; midText = (t as any).thisWeek || "今週\nこんしゅう"; }
                 } else if (isNextWeek) {
                   bgClass = "bg-blue-100";
                   if (col === 3) { showMidText = true; midText = t.nextWeek; }
