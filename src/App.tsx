@@ -186,7 +186,14 @@ function App() {
       {/* Header */}
       <div className="w-full flex justify-between items-center mb-4 mt-2">
         <h1 className="text-xl font-bold text-brown-dark">Calendar</h1>
-        <div className="relative" ref={advancedMenuRef}>
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={() => setShowInstructions(true)} 
+            className="px-3 py-1 bg-brown text-white hover:bg-brown-dark rounded font-bold shadow-[0_4px_0_0_rgba(0,0,0,0.15)] active:translate-y-1 active:shadow-none transition-all text-xs"
+          >
+            {t.howToUse}
+          </button>
+          <div className="relative" ref={advancedMenuRef}>
           <button 
             onClick={() => setShowAdvanced(!showAdvanced)}
             className="px-3 py-1 bg-brown-light text-cream rounded shadow active:translate-y-1 active:shadow-none shadow-[0_4px_0_0_rgba(0,0,0,0.15)] transition-all"
@@ -224,6 +231,7 @@ function App() {
               </div>
             </div>
           )}
+        </div>
         </div>
       </div>
 
