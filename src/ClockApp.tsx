@@ -15,6 +15,7 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
   const [minutes, setMinutes] = useState(0);
   const [isRandoming, setIsRandoming] = useState(false);
   const [is12Hour, setIs12Hour] = useState(false);
+  const [randomInterval, setRandomInterval] = useState(3.5);
 
   useEffect(() => {
     onLangChange(lang);
@@ -26,10 +27,10 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
       interval = window.setInterval(() => {
         setHours(Math.floor(Math.random() * 24));
         setMinutes(Math.floor(Math.random() * 60));
-      }, 3500);
+      }, randomInterval * 1000);
     }
     return () => clearInterval(interval);
-  }, [isRandoming]);
+  }, [isRandoming, randomInterval]);
 
   const toggleRandom = () => setIsRandoming(!isRandoming);
 
@@ -46,10 +47,10 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
 
   // Translations for buttons and toggles
   const t = {
-    JP: { random: "ランダム", back: "カレンダー", mode24: "24時間", mode12: "12時間 (AM/PM)" },
-    VN: { random: "Ngẫu nhiên", back: "Lịch", mode24: "24 giờ", mode12: "12 giờ (AM/PM)" },
-    EN: { random: "Random", back: "Calendar", mode24: "24-Hour", mode12: "12-Hour (AM/PM)" },
-    CN: { random: "随机", back: "日历", mode24: "24小时", mode12: "12小时 (AM/PM)" }
+    JP: { random: "ランダム", back: "カレンダー", mode24: "24時間", mode12: "12時間 (AM/PM)", interval: "待機秒数" },
+    VN: { random: "Ngẫu nhiên", back: "Lịch", mode24: "24 giờ", mode12: "12 giờ (AM/PM)", interval: "Thời gian chờ" },
+    EN: { random: "Random", back: "Calendar", mode24: "24-Hour", mode12: "12-Hour (AM/PM)", interval: "Interval" },
+    CN: { random: "随机", back: "日历", mode24: "24小时", mode12: "12小时 (AM/PM)", interval: "等待秒数" }
   };
 
   const pad = (n: number) => n.toString().padStart(2, "0");
@@ -108,6 +109,26 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
         </div>
 
         <div className="flex flex-col gap-4 mt-8 w-full max-w-xs">
+          <div className="w-full flex items-center justify-between bg-white/70 rounded-xl p-2 px-4 shadow-sm border border-brown-light/30">
+            <span className="font-bold text-brown-dark text-sm">
+              {t[lang].interval || "Interval"}: {randomInterval}s
+            </span>
+            <div className="flex items-center gap-2">
+              <button 
+                onClick={() => setRandomInterval(p => Math.max(0.5, p - 0.5))}
+                className="w-8 h-8 flex items-center justify-center bg-brown-light text-white rounded-lg font-bold shadow-[0_3px_0_0_#5a3a2a] active:translate-y-1 active:shadow-none hover:bg-brown transition-all"
+              >
+                -
+              </button>
+              <button 
+                onClick={() => setRandomInterval(p => p + 0.5)}
+                className="w-8 h-8 flex items-center justify-center bg-brown-light text-white rounded-lg font-bold shadow-[0_3px_0_0_#5a3a2a] active:translate-y-1 active:shadow-none hover:bg-brown transition-all"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
           <button
             onClick={toggleRandom}
             className={`w-full py-4 rounded-xl font-bold text-xl shadow-[0_6px_0_0_rgba(0,0,0,0.2)] active:translate-y-1.5 active:shadow-none transition-all ${isRandoming ? "bg-red-500 text-white hover:bg-red-600 shadow-[0_6px_0_0_#991b1b]" : "bg-blue-500 text-white hover:bg-blue-600 shadow-[0_6px_0_0_#1e3a8a]"}`}
