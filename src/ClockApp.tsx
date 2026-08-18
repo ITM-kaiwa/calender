@@ -65,18 +65,20 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
   }
   
   const timeStr = `${pad(displayHour)}:${pad(minutes)}`;
-  const readingStr = getClockReading(hours, minutes, lang, is12Hour);
+  const readingStr = getClockReading(hours, minutes, lang, isAnalog ? true : is12Hour, isAnalog);
 
   return (
     <div className="min-h-screen bg-amber-50 p-4 flex flex-col items-center select-none w-full max-w-lg mx-auto relative font-sans">
       <div className="w-full flex justify-between items-center mb-8">
         <div className="flex gap-2 items-center">
-          <button 
-            onClick={() => setIs12Hour(!is12Hour)}
-            className="px-3 py-1.5 bg-white border border-brown text-brown font-bold text-sm rounded shadow-sm hover:bg-brown-light hover:text-white transition-colors"
-          >
-            {is12Hour ? t[lang].mode12 : t[lang].mode24}
-          </button>
+          {!isAnalog && (
+            <button 
+              onClick={() => setIs12Hour(!is12Hour)}
+              className="px-3 py-1.5 bg-white border border-brown text-brown font-bold text-sm rounded shadow-sm hover:bg-brown-light hover:text-white transition-colors"
+            >
+              {is12Hour ? t[lang].mode12 : t[lang].mode24}
+            </button>
+          )}
           <button 
             onClick={() => setIsAnalog(!isAnalog)}
             className="px-3 py-1.5 bg-white border border-brown text-brown font-bold text-sm rounded shadow-sm hover:bg-brown-light hover:text-white transition-colors"

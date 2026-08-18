@@ -1,5 +1,5 @@
 
-export function getClockReading(hours: number, minutes: number, lang: "JP"|"EN"|"VN"|"CN", is12Hour: boolean): string {
+export function getClockReading(hours: number, minutes: number, lang: "JP"|"EN"|"VN"|"CN", is12Hour: boolean, hideAmPm: boolean = false): string {
   let displayHour = hours;
   let isPm = hours >= 12;
   if (is12Hour) {
@@ -28,7 +28,7 @@ export function getClockReading(hours: number, minutes: number, lang: "JP"|"EN"|
     }
     
     let timeStr = h[displayHour] + (mStr ? " " + mStr : "");
-    if (is12Hour) {
+    if (is12Hour && !hideAmPm) {
       const ampm = isPm ? "ごご " : "ごぜん ";
       return ampm + timeStr;
     }
@@ -53,7 +53,7 @@ export function getClockReading(hours: number, minutes: number, lang: "JP"|"EN"|
     }
     
     let timeStr = hStr + " " + mStr;
-    if (is12Hour) {
+    if (is12Hour && !hideAmPm) {
       return timeStr + (isPm ? " PM" : " AM");
     }
     return timeStr;
@@ -77,7 +77,7 @@ export function getClockReading(hours: number, minutes: number, lang: "JP"|"EN"|
     }
     
     let timeStr = hStr + (mStr ? " " + mStr : "");
-    if (is12Hour) {
+    if (is12Hour && !hideAmPm) {
       // VN conventionally uses sáng, trưa, chiều, tối, đêm depending on the hour, but for simplicity we can use Sáng/Chiều
       const ampm = isPm ? "chiều" : "sáng";
       return timeStr + " " + ampm;
@@ -105,7 +105,7 @@ export function getClockReading(hours: number, minutes: number, lang: "JP"|"EN"|
     }
     
     let timeStr = hStr + mStr;
-    if (is12Hour) {
+    if (is12Hour && !hideAmPm) {
       const ampm = isPm ? "下午 " : "上午 ";
       return ampm + timeStr;
     }
