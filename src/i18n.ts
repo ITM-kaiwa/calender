@@ -3,6 +3,15 @@ export type Language = "JP" | "VN" | "EN" | "CN";
 
 export const translations = {
   VN: {
+    howToUse: "Hướng dẫn sử dụng",
+    instructions: [
+      "\"Nâng Cao\"… Cho phép cài đặt ngôn ngữ học tập và thiết lập ngày bắt đầu của lịch.",
+      "\"Ngày cụ thể\"… Hiển thị cách gọi/tên gọi của các ngày cụ thể.",
+      "\"Luyện Thứ\"… Sau khi nhấn nút này, chọn một ô bất kỳ trên lịch để hiển thị tên của thứ trong tuần.",
+      "\"Luyện Ngày\"… Sau khi nhấn nút này, chọn một ô bất kỳ trên lịch để hiển thị cách đọc của ngày đó.",
+      "\"Thứ Ngẫu Nhiên\"… Nhấn giữ nút này cho đến khi chữ \"Stop\" xuất hiện, hệ thống sẽ chọn ngẫu nhiên một ô và hiển thị tên thứ sau vài giây.",
+      "\"Ngày Ngẫu Nhiên\"… Nhấn giữ nút này cho đến khi chữ \"Stop\" xuất hiện, hệ thống sẽ chọn ngẫu nhiên một ô và hiển thị cách đọc ngày sau vài giây."
+    ],
     ui: "Giao diện",
     advanced: "Nâng cao",
     startDay: "Bắt đầu vào",
@@ -40,6 +49,15 @@ export const translations = {
     ],
   },
   JP: {
+    howToUse: "使い方",
+    instructions: [
+      "\"Advanced\"… 学習言語や週の始まりを設定できます。",
+      "\"特定日\"… 特定の日の呼び方や名前を表示します。",
+      "\"曜日練習\"… ボタンを押した後、カレンダーの任意のセルを選ぶと、その日の曜日名が表示されます。",
+      "\"日付呼び方練習\"… ボタンを押した後、カレンダーの任意のセルを選ぶと、その日付の読み方が表示されます。",
+      "\"ランダム曜日練習\"… \"Stop\" と表示されるまでボタンを押し続けると、ランダムにセルが選ばれ、数秒後に曜日名が表示されます。",
+      "\"ランダム日付練習\"… \"Stop\" と表示されるまでボタンを押し続けると、ランダムにセルが選ばれ、数秒後に日付の読み方が表示されます。"
+    ],
     ui: "UI",
     advanced: "Advanced",
     startDay: "週の始まり",
@@ -77,6 +95,15 @@ export const translations = {
     ],
   },
   EN: {
+    howToUse: "How to Use",
+    instructions: [
+      "\"Advanced\"… Set the learning language and the start day of the week.",
+      "\"Specific Day\"… Show names/readings of specific days.",
+      "\"Days Practice\"… Click this button, then select any cell on the calendar to see the day of the week.",
+      "\"Dates Practice\"… Click this button, then select any cell to see how to read that date.",
+      "\"Random Days\"… Click and wait until \"Stop\" appears; it randomly selects a cell and shows the day name after a few seconds.",
+      "\"Random Dates\"… Click and wait until \"Stop\" appears; it randomly selects a cell and shows the date reading after a few seconds."
+    ],
     ui: "UI",
     advanced: "Advanced",
     startDay: "Start Day",
@@ -114,6 +141,15 @@ export const translations = {
     ],
   },
   CN: {
+    howToUse: "使用说明",
+    instructions: [
+      "\"Advanced\"… 允许设置学习语言和一周的开始日期。",
+      "\"特定日\"… 显示特定日期的名称或读法。",
+      "\"星期练习\"… 点击此按钮后，选择日历上的任意单元格以显示星期名称。",
+      "\"日期练习\"… 点击此按钮后，选择日历上的任意单元格以显示日期的读法。",
+      "\"随机星期\"… 点击直到显示 \"Stop\"，系统将随机选择一个单元格，并在几秒钟后显示星期名称。",
+      "\"随机日期\"… 点击直到显示 \"Stop\"，系统将随机选择一个单元格，并在几秒钟后显示日期的读法。"
+    ],
     ui: "UI",
     advanced: "Advanced",
     startDay: "开始日",

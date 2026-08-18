@@ -9,6 +9,7 @@ function App() {
   const [lang, setLang] = useState<Language>("VN");
   const [startDay, setStartDay] = useState<"MONDAY" | "SUNDAY">("MONDAY");
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
   const advancedMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -413,7 +414,36 @@ function App() {
           {mode === "RANDOM_DATES" && isRandomRunning ? "Stop" : t.randomDates}
         </button>
 
-      </div>
+          </div>
+
+      {showInstructions && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm" 
+          onClick={() => setShowInstructions(false)}
+        >
+          <div 
+            className="bg-cream w-full max-w-lg rounded-xl shadow-2xl overflow-hidden flex flex-col" 
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="bg-brown text-white p-4 flex justify-between items-center">
+              <h2 className="font-bold text-lg">{t.howToUse}</h2>
+              <button 
+                onClick={() => setShowInstructions(false)} 
+                className="text-white hover:text-red-300 font-bold text-2xl leading-none px-2 active:scale-90 transition-transform"
+              >
+                &times;
+              </button>
+            </div>
+            <div className="p-6 text-brown-dark text-sm space-y-4 max-h-[70vh] overflow-y-auto">
+              {t.instructions.map((inst, idx) => (
+                <div key={idx} className="border-b border-brown-light/30 pb-3 last:border-0 leading-relaxed font-medium">
+                  {inst}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
