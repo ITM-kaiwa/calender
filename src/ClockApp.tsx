@@ -116,13 +116,13 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
             <div className="flex items-center gap-2">
               <button 
                 onClick={() => setRandomInterval(p => Math.max(0.5, p - 0.5))}
-                className="w-8 h-8 flex items-center justify-center bg-brown-light text-white rounded-lg font-bold shadow-[0_3px_0_0_#5a3a2a] active:translate-y-1 active:shadow-none hover:bg-brown transition-all"
+                className="w-10 h-10 flex items-center justify-center bg-gray-400 text-white rounded-lg text-2xl font-bold shadow-[0_3px_0_0_#4b5563] active:translate-y-1 active:shadow-none hover:bg-gray-500 transition-all leading-none"
               >
                 -
               </button>
               <button 
                 onClick={() => setRandomInterval(p => p + 0.5)}
-                className="w-8 h-8 flex items-center justify-center bg-brown-light text-white rounded-lg font-bold shadow-[0_3px_0_0_#5a3a2a] active:translate-y-1 active:shadow-none hover:bg-brown transition-all"
+                className="w-10 h-10 flex items-center justify-center bg-gray-400 text-white rounded-lg text-2xl font-bold shadow-[0_3px_0_0_#4b5563] active:translate-y-1 active:shadow-none hover:bg-gray-500 transition-all leading-none"
               >
                 +
               </button>
