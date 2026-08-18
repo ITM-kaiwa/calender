@@ -26,12 +26,23 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
       interval = window.setInterval(() => {
         setHours(Math.floor(Math.random() * 24));
         setMinutes(Math.floor(Math.random() * 60));
-      }, 2000);
+      }, 3500);
     }
     return () => clearInterval(interval);
   }, [isRandoming]);
 
   const toggleRandom = () => setIsRandoming(!isRandoming);
+
+  const advanceTime = () => {
+    let m = minutes + 30;
+    let h = hours;
+    if (m >= 60) {
+      m -= 60;
+      h = (h + 1) % 24;
+    }
+    setMinutes(m);
+    setHours(h);
+  };
 
   // Translations for buttons and toggles
   const t = {
@@ -76,7 +87,10 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
       </div>
 
       <div className="flex-1 w-full flex flex-col items-center justify-center gap-8 mt-4">
-        <div className="w-full bg-black rounded-2xl shadow-xl p-8 flex flex-col items-center justify-center border-4 border-gray-800 relative">
+        <div 
+          onClick={advanceTime}
+          className="w-full bg-black rounded-2xl shadow-xl p-8 flex flex-col items-center justify-center border-4 border-gray-800 relative cursor-pointer active:scale-[0.98] transition-transform"
+        >
           {is12Hour && (
             <div className="absolute top-4 left-6 text-cyan-500 font-bold text-xl md:text-2xl" style={{ fontFamily: "\"Courier New\", Courier, monospace" }}>
               {ampmStr}
