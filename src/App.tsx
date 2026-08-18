@@ -5,8 +5,10 @@ import type { Language } from "./i18n";
 
 type Mode = "NONE" | "PRACTICE_DAYS" | "PRACTICE_DATES" | "RANDOM_DAYS" | "RANDOM_DATES" | "TIME_ATTACK" | "SPECIFIC_DAY";
 
-function App() {
-  const [lang, setLang] = useState<Language>("VN");
+function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: () => void, globalLang: Language, setGlobalLang: (l: Language) => void }) {
+  const lang = globalLang;
+  const setLang = setGlobalLang;
+  
   const [startDay, setStartDay] = useState<"MONDAY" | "SUNDAY">("MONDAY");
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
@@ -215,6 +217,14 @@ function App() {
                   <option value="EN">EN</option>
                   <option value="CN">CN</option>
                 </select>
+              </div>
+              <div className="flex flex-col gap-2 mt-4 mb-2">
+                <button 
+                  onClick={onGoToClock}
+                  className="w-full py-1.5 bg-blue-500 text-white rounded font-bold shadow-[0_3px_0_0_#1e3a8a] active:translate-y-1 active:shadow-none transition-all text-sm hover:bg-blue-600"
+                >
+                  時計学習アプリ
+                </button>
               </div>
               <div className="flex flex-col gap-1">
                 <label className="text-sm font-semibold">{t.startDay}</label>
@@ -456,4 +466,17 @@ function App() {
   );
 }
 
-export default App;
+
+
+import ClockApp from "./ClockApp";
+
+export default function App() {
+  const [view, setView] = useState<"CALENDAR" | "CLOCK">("CALENDAR");
+  const [globalLang, setGlobalLang] = useState<Language>("VN");
+
+  if (view === "CLOCK") {
+    return <ClockApp onReturn={() => setView("CALENDAR")} initialLang={globalLang} onLangChange={setGlobalLang} />;
+  }
+
+  return <CalendarApp onGoToClock={() => setView("CLOCK")} globalLang={globalLang} setGlobalLang={setGlobalLang} />;
+}
