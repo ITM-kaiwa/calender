@@ -290,11 +290,11 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
               title={t.lastMonth}
             >
               {"<"}
-              {mode === "SPECIFIC_DAY" && <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-brown-dark text-cream text-[10px] md:text-xs p-1 rounded whitespace-pre-wrap text-center leading-tight z-20 w-max">{t.lastMonth}</span>}
+              {mode === "SPECIFIC_DAY" && <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-pink-100 border border-pink-200 text-brown-dark text-[10px] md:text-xs p-1 rounded whitespace-pre-wrap text-center leading-tight z-20 w-max">{t.lastMonth}</span>}
             </button>
             <div className="relative flex flex-col items-center justify-center w-24">
               <span className="text-xl font-bold w-auto px-2 text-center leading-none mt-1">{lang === "EN" ? t.monthNames[month] : `${month + 1}${t.month}`}</span>
-              {mode === "SPECIFIC_DAY" && <span className="absolute top-7 bg-brown-dark text-cream text-[10px] md:text-xs px-2 py-0.5 rounded whitespace-pre-wrap text-center leading-tight z-20 w-max shadow-sm">{(t as any).thisMonth}</span>}
+              {mode === "SPECIFIC_DAY" && <span className="absolute top-7 bg-pink-100 border border-pink-200 text-brown-dark text-[10px] md:text-xs px-2 py-0.5 rounded whitespace-pre-wrap text-center leading-tight z-20 w-max shadow-sm">{(t as any).thisMonth}</span>}
             </div>
             <button 
               onClick={nextMonth} 
@@ -302,7 +302,7 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
               title={t.nextMonth}
             >
               {">"}
-              {mode === "SPECIFIC_DAY" && <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-brown-dark text-cream text-[10px] md:text-xs p-1 rounded whitespace-pre-wrap text-center leading-tight z-20 w-max">{t.nextMonth}</span>}
+              {mode === "SPECIFIC_DAY" && <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-pink-100 border border-pink-200 text-brown-dark text-[10px] md:text-xs p-1 rounded whitespace-pre-wrap text-center leading-tight z-20 w-max">{t.nextMonth}</span>}
             </button>
           </div>
         </div>
