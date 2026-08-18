@@ -362,18 +362,21 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
                   content = t.dateReadings[date! - 1];
                 }
               } else if (mode === "SPECIFIC_DAY") {
-                if (specificText) {
+                if (isLastWeek) {
                   bgClass = "bg-green-100";
-                  content = specificText;
-                } else if (isLastWeek) {
-                  bgClass = "bg-green-100";
-                  if (col === 3) { showMidText = true; midText = t.lastWeek; } // Center of week
+                  if (col === 3) { showMidText = true; midText = t.lastWeek; }
                 } else if (isThisWeek) {
                   bgClass = "bg-green-300";
                   if (col === 3) { showMidText = true; midText = (t as any).thisWeek || "今週\nこんしゅう"; }
                 } else if (isNextWeek) {
                   bgClass = "bg-blue-100";
-                  if (col === 3) { showMidText = true; midText = t.nextWeek; } // Center of week
+                  if (col === 3) { showMidText = true; midText = t.nextWeek; }
+                } else if (specificText) {
+                  bgClass = "bg-green-100";
+                }
+
+                if (specificText) {
+                  content = specificText;
                 }
               }
             }
