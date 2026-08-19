@@ -2,25 +2,11 @@
 const fs = require("fs");
 let i18n = fs.readFileSync("src/i18n.ts", "utf8");
 
-i18n = i18n.replace(
-  `lastWeek: "先週\\nせんしゅう",\\n    nextWeek: "来週\\nらいしゅう",`,
-  `lastWeek: "先週\\nせんしゅう",\\n    nextWeek: "来週\\nらいしゅう",\\n    thisWeek: "今週\\nこんしゅう",`
-);
-
-i18n = i18n.replace(
-  `lastWeek: "先週\\nせんしゅう",\\n    nextWeek: "来週\\nらいしゅう",`,
-  `lastWeek: "先週\\nせんしゅう",\\n    nextWeek: "来週\\nらいしゅう",\\n    thisWeek: "今週\\nこんしゅう",`
-);
-
-i18n = i18n.replace(
-  `lastWeek: "Last Week",\\n    nextWeek: "Next Week",`,
-  `lastWeek: "Last Week",\\n    nextWeek: "Next Week",\\n    thisWeek: "This Week",`
-);
-
-i18n = i18n.replace(
-  `lastWeek: "上周 (Shàng zhōu)",\\n    nextWeek: "下周 (Xià zhōu)",`,
-  `lastWeek: "上周 (Shàng zhōu)",\\n    nextWeek: "下周 (Xià zhōu)",\\n    thisWeek: "本周 (Běn zhōu)",`
-);
+i18n = i18n.replace(`timeAttack: "Thử thách thời gian",`, `timeAttack: "Thử thách thời gian",\n    interval: "Thời gian chờ",`);
+i18n = i18n.replace(`timeAttack: "タイムアタック",`, `timeAttack: "タイムアタック",\n    interval: "待機秒数",`);
+i18n = i18n.replace(`timeAttack: "Time Attack",`, `timeAttack: "Time Attack",\n    interval: "Interval",`);
+i18n = i18n.replace(`timeAttack: "时间挑战 (Shíjiān tiǎozhàn)",`, `timeAttack: "时间挑战 (Shíjiān tiǎozhàn)",\n    interval: "等待秒数",`);
 
 fs.writeFileSync("src/i18n.ts", i18n);
+console.log("Done");
 

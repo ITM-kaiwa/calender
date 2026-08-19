@@ -33,6 +33,7 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
   // Time attack state
   const [isRandomRunning, setIsRandomRunning] = useState(false);
   const [randomStep, setRandomStep] = useState<"WAIT" | "SHOW">("WAIT");
+  const [randomInterval, setRandomInterval] = useState(3.5);
   const timeAttackTimer = useRef<number | null>(null);
 
   const t = translations[lang];
@@ -85,7 +86,7 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
       clearTimeout(timeout1);
       clearTimeout(timeout2);
     };
-  }, [mode, isRandomRunning, firstDayIndex, daysInMonth]);
+  }, [mode, isRandomRunning, firstDayIndex, daysInMonth, randomInterval]);
 
   const handleCellClick = (index: number) => {
     const isCurrentMonth = index >= firstDayIndex && index < firstDayIndex + daysInMonth;
@@ -450,7 +451,28 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
 
           </div>
 
-      {showInstructions && (
+      {/* Random Interval Selector */}
+        <div className="w-full flex items-center justify-between bg-white rounded p-2 px-4 shadow-sm border border-brown-light/30">
+          <span className="font-bold text-brown-dark text-sm">
+            {(t as any).interval || "待機秒数"}: {randomInterval}s
+          </span>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={() => setRandomInterval(p => Math.max(0.5, p - 0.5))}
+              className="w-10 h-10 flex items-center justify-center bg-gray-400 text-white rounded-lg text-2xl font-bold shadow-[0_3px_0_0_#4b5563] active:translate-y-1 active:shadow-none hover:bg-gray-500 transition-all leading-none"
+            >
+              -
+            </button>
+            <button 
+              onClick={() => setRandomInterval(p => p + 0.5)}
+              className="w-10 h-10 flex items-center justify-center bg-gray-400 text-white rounded-lg text-2xl font-bold shadow-[0_3px_0_0_#4b5563] active:translate-y-1 active:shadow-none hover:bg-gray-500 transition-all leading-none"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        {showInstructions && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm" 
           onClick={() => setShowInstructions(false)}
