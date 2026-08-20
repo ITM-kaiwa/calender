@@ -239,7 +239,15 @@ function CalendarApp({ onGoToClock, globalLang, setGlobalLang }: { onGoToClock: 
                   className="w-full py-1.5 bg-blue-500 text-white rounded font-bold shadow-[0_3px_0_0_#1e3a8a] active:translate-y-1 active:shadow-none transition-all text-sm hover:bg-blue-600"
                 >
                   時計学習アプリ
-                </button>
+                  </button>
+                  <a 
+                    href="https://itm-kaiwa.github.io/Random/index.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center py-1.5 bg-green-500 text-white rounded font-bold shadow-[0_3px_0_0_#14532d] active:translate-y-1 active:shadow-none transition-all text-sm hover:bg-green-600 text-center block"
+                  >
+                    数字練習アプリ
+                  </a>
               </div>
 
             </div>
