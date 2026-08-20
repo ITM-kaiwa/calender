@@ -5,7 +5,7 @@ export const translations = {
   VN: {
     howToUse: "Hướng dẫn sử dụng",
     instructions: [
-      "\"Nâng Cao\"… Cho phép cài đặt ngôn ngữ học tập, thiết lập ngày bắt đầu của lịch, và truy cập Ứng dụng Học Xem Giờ.",
+      "\"Nâng Cao\"… Cho phép cài đặt ngôn ngữ, thiết lập ngày bắt đầu, và truy cập Ứng dụng Đồng Hồ / Số.",
       "\"Ngày cụ thể\"… Hiển thị cách gọi/tên gọi của các ngày cụ thể.",
       "\"Luyện Thứ\"… Sau khi nhấn nút này, chọn một ô bất kỳ trên lịch để hiển thị tên của thứ trong tuần.",
       "\"Luyện Ngày\"… Sau khi nhấn nút này, chọn một ô bất kỳ trên lịch để hiển thị cách đọc của ngày đó.",
@@ -55,7 +55,7 @@ export const translations = {
   JP: {
     howToUse: "使い方",
     instructions: [
-      "\"Advanced\"… 学習言語や週の始まりの設定、および時間練習用の時計アプリへアクセスできます。",
+      "\"Advanced\"… 学習言語や週の始まりの設定、および時計・数字練習アプリへアクセスできます。",
       "\"特定日\"… 特定の日の呼び方や名前を表示します。",
       "\"曜日練習\"… ボタンを押した後、カレンダーの任意のセルを選ぶと、その日の曜日名が表示されます。",
       "\"日付呼び方練習\"… ボタンを押した後、カレンダーの任意のセルを選ぶと、その日付の読み方が表示されます。",
@@ -105,7 +105,7 @@ export const translations = {
   EN: {
     howToUse: "How to Use",
     instructions: [
-      "\"Advanced\"… Set the learning language, the start day of the week, and access the Clock Learning App.",
+      "\"Advanced\"… Set the language, start day, and access Clock/Numbers apps.",
       "\"Specific Day\"… Show names/readings of specific days.",
       "\"Days Practice\"… Click this button, then select any cell on the calendar to see the day of the week.",
       "\"Dates Practice\"… Click this button, then select any cell to see how to read that date.",
@@ -155,7 +155,7 @@ export const translations = {
   CN: {
     howToUse: "使用说明",
     instructions: [
-      "\"Advanced\"… 允许设置学习语言、一周的开始日期，以及访问时间练习时钟应用。",
+      "\"Advanced\"… 允许设置学习语言、一周的开始日期，以及访问时钟和数字练习应用。",
       "\"特定日\"… 显示特定日期的名称或读法。",
       "\"星期练习\"… 点击此按钮后，选择日历上的任意单元格以显示星期名称。",
       "\"日期练习\"… 点击此按钮后，选择日历上的任意单元格以显示日期的读法。",
