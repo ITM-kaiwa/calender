@@ -74,28 +74,38 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
           {!isAnalog && (
             <button 
               onClick={() => setIs12Hour(!is12Hour)}
-              className="px-3 py-1.5 bg-white border border-brown text-brown font-bold text-sm rounded shadow-sm hover:bg-brown-light hover:text-white transition-colors"
+              className="px-3 py-1.5 bg-white border border-brown text-brown font-bold text-sm rounded shadow-sm hover:bg-brown-dark hover:text-white active:scale-90 active:shadow-none transition-all"
             >
               {is12Hour ? t[lang].mode12 : t[lang].mode24}
             </button>
           )}
           <button 
             onClick={() => setIsAnalog(!isAnalog)}
-            className="px-3 py-1.5 bg-white border border-brown text-brown font-bold text-sm rounded shadow-sm hover:bg-brown-light hover:text-white transition-colors"
+            className="px-3 py-1.5 bg-white border border-brown text-brown font-bold text-sm rounded shadow-sm hover:bg-brown-dark hover:text-white active:scale-90 active:shadow-none transition-all"
           >
             {isAnalog ? t[lang].digital : t[lang].analog}
           </button>
         </div>
-        <select 
-          className="bg-white border border-brown text-brown text-sm p-1.5 rounded shadow-sm outline-none cursor-pointer font-bold"
-          value={lang} 
-          onChange={(e) => setLang(e.target.value as Language)}
-        >
-          <option value="JP">日本語</option>
-          <option value="EN">English</option>
-          <option value="VN">Tiếng Việt</option>
-          <option value="CN">中文</option>
-        </select>
+        <div className="flex items-center gap-2">
+          <a
+            href="https://itm-kaiwa.github.io/Random/index.html"
+            title="Random Practice"
+            aria-label="Random Practice"
+            className="w-9 h-9 flex items-center justify-center bg-white border border-brown text-brown text-lg rounded shadow-sm hover:bg-brown-dark hover:text-white active:scale-90 active:shadow-none transition-all"
+          >
+            🔗
+          </a>
+          <select 
+            className="bg-white border border-brown text-brown text-sm p-1.5 rounded shadow-sm outline-none cursor-pointer font-bold hover:bg-brown-dark hover:text-white active:scale-95 transition-all"
+            value={lang} 
+            onChange={(e) => setLang(e.target.value as Language)}
+          >
+            <option value="JP">日本語</option>
+            <option value="EN">English</option>
+            <option value="VN">Tiếng Việt</option>
+            <option value="CN">中文</option>
+          </select>
+        </div>
       </div>
 
       <div className="flex-1 w-full flex flex-col items-center justify-center gap-8 mt-4">
