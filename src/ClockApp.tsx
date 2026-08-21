@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { getClockReading } from "./clock-logic";
 import type { Language } from "./i18n";
@@ -209,4 +208,3 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
     </div>
   );
 }
-
