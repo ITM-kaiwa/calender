@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getClockReading } from "./clock-logic";
-import { getTimePeriod, timePeriodWords } from "./timeperiod";
+import { getTimePeriod, timePeriodWords } from "./time-period";
 import type { Language } from "./i18n";
 
 interface ClockAppProps {
@@ -74,20 +74,20 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
 
   const Chip = ({ icon, label, active }: { icon: string; label: string; active: boolean }) => (
     <div
-      className={`flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl border transition-all whitespace-pre-wrap text-center leading-tight ${
+      className={`flex flex-col items-center gap-0 px-2 py-1 rounded-lg border transition-all whitespace-pre-wrap text-center leading-tight ${
         active
-          ? "bg-brown text-white border-brown shadow-[0_3px_0_0_rgba(0,0,0,0.2)] scale-105"
+          ? "bg-brown text-white border-brown shadow-[0_2px_0_0_rgba(0,0,0,0.2)] scale-105"
           : "bg-white/60 text-brown-dark/40 border-brown-light/20"
       }`}
     >
-      <span className={`text-xl ${active ? "" : "opacity-40 grayscale"}`}>{icon}</span>
+      <span className={`text-lg ${active ? "" : "opacity-40 grayscale"}`}>{icon}</span>
       <span className="text-[11px] font-bold">{label}</span>
     </div>
   );
 
   return (
     <div className="min-h-screen bg-amber-50 p-4 flex flex-col items-center select-none w-full max-w-lg mx-auto relative font-sans">
-      <div className="w-full flex justify-between items-center mb-8">
+      <div className="w-full flex justify-between items-center mb-3">
         <div className="flex gap-2 items-center">
           {!isAnalog && (
             <button 
@@ -126,11 +126,35 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
         </div>
       </div>
 
-      <div className="flex-1 w-full flex flex-col items-center justify-center gap-8 mt-4">
+      <div className="w-full flex items-center gap-2 mb-3">
+        <button
+          onClick={toggleRandom}
+          className={`flex-1 py-2.5 rounded-xl font-bold text-base shadow-[0_4px_0_0_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-none transition-all ${isRandoming ? "bg-red-500 text-white hover:bg-red-600 shadow-[0_4px_0_0_#991b1b]" : "bg-orange-400 text-white hover:bg-orange-500 shadow-[0_4px_0_0_#9a3412]"}`}
+        >
+          {isRandoming ? "Stop" : t[lang].random}
+        </button>
+        <div className="flex items-center gap-1.5 bg-white/70 rounded-xl px-2 py-1.5 shadow-sm border border-brown-light/30 shrink-0">
+          <button
+            onClick={() => setRandomInterval(p => Math.max(0.5, p - 0.5))}
+            className="w-7 h-7 flex items-center justify-center bg-gray-400 text-white rounded-md text-base font-bold active:translate-y-0.5 hover:bg-gray-500 transition-all leading-none"
+          >
+            -
+          </button>
+          <span className="text-xs font-bold text-brown-dark w-9 text-center whitespace-nowrap">{randomInterval}s</span>
+          <button
+            onClick={() => setRandomInterval(p => p + 0.5)}
+            className="w-7 h-7 flex items-center justify-center bg-gray-400 text-white rounded-md text-base font-bold active:translate-y-0.5 hover:bg-gray-500 transition-all leading-none"
+          >
+            +
+          </button>
+        </div>
+      </div>
+
+      <div className="flex-1 w-full flex flex-col items-center justify-center gap-3">
         {isAnalog ? (
           <div 
             onClick={advanceTime}
-            className="w-full max-w-[280px] md:max-w-[320px] aspect-square bg-white rounded-full shadow-xl flex items-center justify-center border-8 border-gray-800 relative cursor-pointer active:scale-[0.98] transition-transform mx-auto"
+            className="w-full max-w-[165px] md:max-w-[200px] aspect-square bg-white rounded-full shadow-xl flex items-center justify-center border-4 border-gray-800 relative cursor-pointer active:scale-[0.98] transition-transform mx-auto"
           >
             <svg viewBox="0 0 100 100" className="w-full h-full">
               {/* Minute Ticks */}
@@ -167,31 +191,31 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
             </svg>
           </div>
         ) : (
-          <div 
+          <div
             onClick={advanceTime}
-            className="w-full bg-black rounded-2xl shadow-xl p-8 flex flex-col items-center justify-center border-4 border-gray-800 relative cursor-pointer active:scale-[0.98] transition-transform"
+            className="w-full bg-black rounded-2xl shadow-xl px-8 py-3 flex flex-col items-center justify-center border-4 border-gray-800 relative cursor-pointer active:scale-[0.98] transition-transform"
           >
             {is12Hour && (
-              <div className="absolute top-4 left-6 text-cyan-500 font-bold text-xl md:text-2xl" style={{ fontFamily: "\"Courier New\", Courier, monospace" }}>
+              <div className="absolute top-3 left-6 text-cyan-500 font-bold text-xl md:text-2xl" style={{ fontFamily: "\"Courier New\", Courier, monospace" }}>
                 {ampmStr}
               </div>
             )}
-            <div className="text-7xl md:text-8xl font-black text-cyan-200 tracking-wider mt-4" style={{ fontFamily: "\"Courier New\", Courier, monospace", textShadow: "0 0 10px rgba(165,243,252,0.5)" }}>
+            <div className="text-7xl md:text-8xl font-black text-cyan-200 tracking-wider" style={{ fontFamily: "\"Courier New\", Courier, monospace", textShadow: "0 0 10px rgba(165,243,252,0.5)" }}>
               {timeStr}
             </div>
           </div>
         )}
 
-        <div className="min-h-[80px] w-full flex items-center justify-center text-center px-4">
+        <div className="min-h-[48px] w-full flex items-center justify-center text-center px-4">
           <div className="text-2xl md:text-3xl font-bold text-brown-dark leading-tight whitespace-pre-wrap break-words">
             {readingStr}
           </div>
         </div>
 
-        <div className="w-full max-w-md flex flex-col gap-3 bg-white/70 rounded-xl p-3 border border-brown-light/30 shadow-sm">
+        <div className="w-full max-w-md flex flex-col gap-2 bg-white/70 rounded-xl p-2 border border-brown-light/30 shadow-sm">
           <div>
-            <div className="text-xs font-bold text-brown-dark/60 mb-1.5 text-center">{pw.periodLabel}</div>
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="text-xs font-bold text-brown-dark/60 mb-1 text-center">{pw.periodLabel}</div>
+            <div className="flex flex-wrap justify-center gap-1.5">
               {periodOrder.map((key) => (
                 <Chip key={key} icon={pw.periods[key].icon} label={pw.periods[key].label} active={key === period} />
               ))}
@@ -199,53 +223,24 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
           </div>
 
           <div>
-            <div className="text-xs font-bold text-brown-dark/60 mb-1.5 text-center">{pw.relatedLabel}</div>
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="text-xs font-bold text-brown-dark/60 mb-1 text-center">{pw.relatedLabel}</div>
+            <div className="flex flex-wrap justify-center gap-1.5">
               <Chip icon={pw.gozen.icon} label={pw.gozen.label} active={isGozen} />
               <Chip icon={pw.gogo.icon} label={pw.gogo.label} active={!isGozen} />
               <Chip icon={pw.kesa.icon} label={pw.kesa.label} active={period === "asa"} />
               <Chip icon={pw.konya.icon} label={pw.konya.label} active={period === "yoru" || period === "shinya"} />
               <Chip icon={pw.sakuban.icon} label={pw.sakuban.label} active={false} />
             </div>
-            <div className="text-[10px] text-brown-dark/50 text-center mt-1.5 whitespace-pre-wrap">{pw.sakubanNote}</div>
+            <div className="text-[10px] text-brown-dark/50 text-center mt-1 whitespace-pre-wrap">{pw.sakubanNote}</div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 mt-8 w-full max-w-xs">
-          <div className="w-full flex items-center justify-between bg-white/70 rounded-xl p-2 px-4 shadow-sm border border-brown-light/30">
-            <span className="font-bold text-brown-dark text-sm">
-              {t[lang].interval || "Interval"}: {randomInterval}s
-            </span>
-            <div className="flex items-center gap-2">
-              <button 
-                onClick={() => setRandomInterval(p => Math.max(0.5, p - 0.5))}
-                className="w-10 h-10 flex items-center justify-center bg-gray-400 text-white rounded-lg text-2xl font-bold shadow-[0_3px_0_0_#4b5563] active:translate-y-1 active:shadow-none hover:bg-gray-500 transition-all leading-none"
-              >
-                -
-              </button>
-              <button 
-                onClick={() => setRandomInterval(p => p + 0.5)}
-                className="w-10 h-10 flex items-center justify-center bg-gray-400 text-white rounded-lg text-2xl font-bold shadow-[0_3px_0_0_#4b5563] active:translate-y-1 active:shadow-none hover:bg-gray-500 transition-all leading-none"
-              >
-                +
-              </button>
-            </div>
-          </div>
-
-          <button
-            onClick={toggleRandom}
-            className={`w-full py-4 rounded-xl font-bold text-xl shadow-[0_6px_0_0_rgba(0,0,0,0.2)] active:translate-y-1.5 active:shadow-none transition-all ${isRandoming ? "bg-red-500 text-white hover:bg-red-600 shadow-[0_6px_0_0_#991b1b]" : "bg-blue-500 text-white hover:bg-blue-600 shadow-[0_6px_0_0_#1e3a8a]"}`}
-          >
-            {isRandoming ? "Stop" : t[lang].random}
-          </button>
-
-          <button
-            onClick={onReturn}
-            className="w-full py-3 bg-brown text-cream rounded-xl font-bold text-lg shadow-[0_6px_0_0_#5a3a2a] hover:bg-brown-dark active:translate-y-1.5 active:shadow-none transition-all mt-4"
-          >
-            {t[lang].back}
-          </button>
-        </div>
+        <button
+          onClick={onReturn}
+          className="w-full max-w-xs py-3 bg-brown text-cream rounded-xl font-bold text-lg shadow-[0_6px_0_0_#5a3a2a] hover:bg-brown-dark active:translate-y-1.5 active:shadow-none transition-all mt-2"
+        >
+          {t[lang].back}
+        </button>
       </div>
     </div>
   );
