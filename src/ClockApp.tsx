@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getClockReading } from "./clock-logic";
-import { getTimePeriod, timePeriodWords } from "./time-period";
+import { getTimePeriod, timePeriodWords } from "./timeperiod";
 import type { Language } from "./i18n";
 
 interface ClockAppProps {
