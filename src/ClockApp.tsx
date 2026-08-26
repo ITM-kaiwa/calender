@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getClockReading } from "./clock-logic";
+import { getTimePeriod, timePeriodWords } from "./time-period";
 import type { Language } from "./i18n";
 
 interface ClockAppProps {
@@ -65,6 +66,24 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
   
   const timeStr = `${pad(displayHour)}:${pad(minutes)}`;
   const readingStr = getClockReading(hours, minutes, lang, isAnalog ? true : is12Hour, isAnalog);
+
+  const period = getTimePeriod(hours);
+  const isGozen = hours < 12;
+  const pw = timePeriodWords[lang];
+  const periodOrder: (keyof typeof pw.periods)[] = ["shinya", "asa", "hiru", "yugata", "yoru"];
+
+  const Chip = ({ icon, label, active }: { icon: string; label: string; active: boolean }) => (
+    <div
+      className={`flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl border transition-all whitespace-pre-wrap text-center leading-tight ${
+        active
+          ? "bg-brown text-white border-brown shadow-[0_3px_0_0_rgba(0,0,0,0.2)] scale-105"
+          : "bg-white/60 text-brown-dark/40 border-brown-light/20"
+      }`}
+    >
+      <span className={`text-xl ${active ? "" : "opacity-40 grayscale"}`}>{icon}</span>
+      <span className="text-[11px] font-bold">{label}</span>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-amber-50 p-4 flex flex-col items-center select-none w-full max-w-lg mx-auto relative font-sans">
@@ -166,6 +185,29 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
         <div className="min-h-[80px] w-full flex items-center justify-center text-center px-4">
           <div className="text-2xl md:text-3xl font-bold text-brown-dark leading-tight whitespace-pre-wrap break-words">
             {readingStr}
+          </div>
+        </div>
+
+        <div className="w-full max-w-md flex flex-col gap-3 bg-white/70 rounded-xl p-3 border border-brown-light/30 shadow-sm">
+          <div>
+            <div className="text-xs font-bold text-brown-dark/60 mb-1.5 text-center">{pw.periodLabel}</div>
+            <div className="flex flex-wrap justify-center gap-2">
+              {periodOrder.map((key) => (
+                <Chip key={key} icon={pw.periods[key].icon} label={pw.periods[key].label} active={key === period} />
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="text-xs font-bold text-brown-dark/60 mb-1.5 text-center">{pw.relatedLabel}</div>
+            <div className="flex flex-wrap justify-center gap-2">
+              <Chip icon={pw.gozen.icon} label={pw.gozen.label} active={isGozen} />
+              <Chip icon={pw.gogo.icon} label={pw.gogo.label} active={!isGozen} />
+              <Chip icon={pw.kesa.icon} label={pw.kesa.label} active={period === "asa"} />
+              <Chip icon={pw.konya.icon} label={pw.konya.label} active={period === "yoru" || period === "shinya"} />
+              <Chip icon={pw.sakuban.icon} label={pw.sakuban.label} active={false} />
+            </div>
+            <div className="text-[10px] text-brown-dark/50 text-center mt-1.5 whitespace-pre-wrap">{pw.sakubanNote}</div>
           </div>
         </div>
 
