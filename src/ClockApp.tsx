@@ -242,6 +242,10 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
           {t[lang].back}
         </button>
       </div>
+
+      <div className="w-full text-center text-[11px] text-brown-dark/50 mt-4 mb-1">
+        2026 © ITM All Right Reserved
+      </div>
     </div>
   );
 }
