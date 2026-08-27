@@ -515,7 +515,7 @@ import ClockApp from "./ClockApp";
 export default function App() {
   const [view, setView] = useState<"CALENDAR" | "CLOCK">("CALENDAR");
   const [globalLang, setGlobalLang] = useState<Language>("VN");
-  const [clockLang, setClockLang] = useState<Language>("JP");
+  const [clockLang, setClockLang] = useState<Language>("VN");
 
   if (view === "CLOCK") {
     return <ClockApp onReturn={() => setView("CALENDAR")} initialLang={clockLang} onLangChange={setClockLang} />;

@@ -65,11 +65,11 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
   }
   
   const timeStr = `${pad(displayHour)}:${pad(minutes)}`;
-  const readingStr = getClockReading(hours, minutes, lang, isAnalog ? true : is12Hour, isAnalog);
+  const readingStr = getClockReading(hours, minutes, lang === "VN" ? "JP" : lang, isAnalog ? true : is12Hour, isAnalog);
 
   const period = getTimePeriod(hours);
   const isGozen = hours < 12;
-  const pw = timePeriodWords[lang];
+  const pw = timePeriodWords[lang === "VN" ? "JP" : lang];
   const periodOrder: (keyof typeof pw.periods)[] = ["shinya", "asa", "hiru", "yugata", "yoru"];
 
   const Chip = ({ icon, label, active }: { icon: string; label: string; active: boolean }) => (
