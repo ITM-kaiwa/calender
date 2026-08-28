@@ -17,6 +17,7 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
   const [is12Hour, setIs12Hour] = useState(false);
   const [randomInterval, setRandomInterval] = useState(3.5);
   const [isAnalog, setIsAnalog] = useState(false);
+  const [showJapaneseReading, setShowJapaneseReading] = useState(true);
 
   useEffect(() => {
     onLangChange(lang);
@@ -48,10 +49,10 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
 
   // Translations for buttons and toggles
   const t = {
-    JP: { random: "ランダム", back: "カレンダー", mode24: "24時間", mode12: "12時間 (AM/PM)", interval: "待機秒数", analog: "アナログ", digital: "デジタル" },
-    VN: { random: "Ngẫu nhiên", back: "Lịch", mode24: "24 giờ", mode12: "12 giờ (AM/PM)", interval: "Thời gian chờ", analog: "Đồng hồ kim", digital: "Đồng hồ số" },
-    EN: { random: "Random", back: "Calendar", mode24: "24-Hour", mode12: "12-Hour (AM/PM)", interval: "Interval", analog: "Analog", digital: "Digital" },
-    CN: { random: "随机", back: "日历", mode24: "24小时", mode12: "12小时 (AM/PM)", interval: "等待秒数", analog: "模拟", digital: "数字" }
+    JP: { random: "ランダム", back: "カレンダー", mode24: "24時間", mode12: "12時間 (AM/PM)", interval: "待機秒数", analog: "アナログ", digital: "デジタル", jpToggle: "日本語読み" },
+    VN: { random: "Ngẫu nhiên", back: "Lịch", mode24: "24 giờ", mode12: "12 giờ (AM/PM)", interval: "Thời gian chờ", analog: "Đồng hồ kim", digital: "Đồng hồ số", jpToggle: "Đọc tiếng Nhật" },
+    EN: { random: "Random", back: "Calendar", mode24: "24-Hour", mode12: "12-Hour (AM/PM)", interval: "Interval", analog: "Analog", digital: "Digital", jpToggle: "Japanese reading" },
+    CN: { random: "随机", back: "日历", mode24: "24小时", mode12: "12小时 (AM/PM)", interval: "等待秒数", analog: "模拟", digital: "数字", jpToggle: "日语读法" }
   };
 
   const pad = (n: number) => n.toString().padStart(2, "0");
@@ -65,11 +66,12 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
   }
   
   const timeStr = `${pad(displayHour)}:${pad(minutes)}`;
-  const readingStr = getClockReading(hours, minutes, lang === "VN" ? "JP" : lang, isAnalog ? true : is12Hour, isAnalog);
+  const effectiveLang = showJapaneseReading ? "JP" : lang;
+  const readingStr = getClockReading(hours, minutes, effectiveLang, isAnalog ? true : is12Hour, isAnalog);
 
   const period = getTimePeriod(hours);
   const isGozen = hours < 12;
-  const pw = timePeriodWords[lang === "VN" ? "JP" : lang];
+  const pw = timePeriodWords[effectiveLang];
   const periodOrder: (keyof typeof pw.periods)[] = ["shinya", "asa", "hiru", "yugata", "yoru"];
 
   const Chip = ({ icon, label, active }: { icon: string; label: string; active: boolean }) => (
@@ -97,12 +99,21 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
               {is12Hour ? t[lang].mode12 : t[lang].mode24}
             </button>
           )}
-          <button 
+          <button
             onClick={() => setIsAnalog(!isAnalog)}
             className="px-3 py-1.5 bg-white border border-brown text-brown font-bold text-sm rounded shadow-sm hover:bg-brown-dark hover:text-white active:scale-90 active:shadow-none transition-all"
           >
             {isAnalog ? t[lang].digital : t[lang].analog}
           </button>
+          <label className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-brown rounded shadow-sm text-brown font-bold text-sm cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={showJapaneseReading}
+              onChange={(e) => setShowJapaneseReading(e.target.checked)}
+              className="w-4 h-4 accent-brown-dark cursor-pointer"
+            />
+            {t[lang].jpToggle}
+          </label>
         </div>
         <div className="flex items-center gap-2">
           <a
@@ -241,10 +252,6 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
         >
           {t[lang].back}
         </button>
-      </div>
-
-      <div className="w-full text-center text-[11px] text-brown-dark/50 mt-4 mb-1">
-        2026 © ITM All Right Reserved
       </div>
     </div>
   );
