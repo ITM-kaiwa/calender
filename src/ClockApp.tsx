@@ -49,10 +49,10 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
 
   // Translations for buttons and toggles
   const t = {
-    JP: { random: "ランダム", back: "カレンダー", mode24: "24時間", mode12: "12時間 (AM/PM)", interval: "待機秒数", analog: "アナログ", digital: "デジタル", jpToggle: "日本語読み" },
-    VN: { random: "Ngẫu nhiên", back: "Lịch", mode24: "24 giờ", mode12: "12 giờ (AM/PM)", interval: "Thời gian chờ", analog: "Đồng hồ kim", digital: "Đồng hồ số", jpToggle: "Đọc tiếng Nhật" },
-    EN: { random: "Random", back: "Calendar", mode24: "24-Hour", mode12: "12-Hour (AM/PM)", interval: "Interval", analog: "Analog", digital: "Digital", jpToggle: "Japanese reading" },
-    CN: { random: "随机", back: "日历", mode24: "24小时", mode12: "12小时 (AM/PM)", interval: "等待秒数", analog: "模拟", digital: "数字", jpToggle: "日语读法" }
+    JP: { random: "ランダム", back: "カレンダー", mode24: "24時間", mode12: "12時間", interval: "待機秒数", analog: "アナログ", digital: "デジタル", jpToggle: "読み表示" },
+    VN: { random: "Ngẫu nhiên", back: "Lịch", mode24: "24 giờ", mode12: "12 giờ", interval: "Thời gian chờ", analog: "Đồng hồ kim", digital: "Đồng hồ số", jpToggle: "Hiện đọc" },
+    EN: { random: "Random", back: "Calendar", mode24: "24-Hour", mode12: "12-Hour", interval: "Interval", analog: "Analog", digital: "Digital", jpToggle: "Show reading" },
+    CN: { random: "随机", back: "日历", mode24: "24小时", mode12: "12小时", interval: "等待秒数", analog: "模拟", digital: "数字", jpToggle: "显示读法" }
   };
 
   const pad = (n: number) => n.toString().padStart(2, "0");
@@ -66,12 +66,11 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
   }
   
   const timeStr = `${pad(displayHour)}:${pad(minutes)}`;
-  const effectiveLang = showJapaneseReading ? "JP" : lang;
-  const readingStr = getClockReading(hours, minutes, effectiveLang, isAnalog ? true : is12Hour, isAnalog);
+  const readingStr = getClockReading(hours, minutes, "JP", isAnalog ? true : is12Hour, isAnalog);
 
   const period = getTimePeriod(hours);
   const isGozen = hours < 12;
-  const pw = timePeriodWords[effectiveLang];
+  const pw = timePeriodWords.JP;
   const periodOrder: (keyof typeof pw.periods)[] = ["shinya", "asa", "hiru", "yugata", "yoru"];
 
   const Chip = ({ icon, label, active }: { icon: string; label: string; active: boolean }) => (
@@ -89,44 +88,44 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
 
   return (
     <div className="min-h-screen bg-amber-50 p-4 flex flex-col items-center select-none w-full max-w-lg mx-auto relative font-sans">
-      <div className="w-full flex justify-between items-center mb-3">
-        <div className="flex gap-2 items-center">
+      <div className="w-full flex flex-wrap justify-between items-center gap-1.5 mb-3">
+        <div className="flex flex-wrap gap-1.5 items-center">
           {!isAnalog && (
-            <button 
+            <button
               onClick={() => setIs12Hour(!is12Hour)}
-              className="px-3 py-1.5 bg-white border border-brown text-brown font-bold text-sm rounded shadow-sm hover:bg-brown-dark hover:text-white active:scale-90 active:shadow-none transition-all"
+              className="px-2 py-1 bg-white border border-brown text-brown font-bold text-xs rounded shadow-sm hover:bg-brown-dark hover:text-white active:scale-90 active:shadow-none transition-all whitespace-nowrap"
             >
               {is12Hour ? t[lang].mode12 : t[lang].mode24}
             </button>
           )}
           <button
             onClick={() => setIsAnalog(!isAnalog)}
-            className="px-3 py-1.5 bg-white border border-brown text-brown font-bold text-sm rounded shadow-sm hover:bg-brown-dark hover:text-white active:scale-90 active:shadow-none transition-all"
+            className="px-2 py-1 bg-white border border-brown text-brown font-bold text-xs rounded shadow-sm hover:bg-brown-dark hover:text-white active:scale-90 active:shadow-none transition-all whitespace-nowrap"
           >
             {isAnalog ? t[lang].digital : t[lang].analog}
           </button>
-          <label className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-brown rounded shadow-sm text-brown font-bold text-sm cursor-pointer select-none">
+          <label className="flex items-center gap-1 px-2 py-1 bg-white border border-brown rounded shadow-sm text-brown font-bold text-xs cursor-pointer select-none whitespace-nowrap">
             <input
               type="checkbox"
               checked={showJapaneseReading}
               onChange={(e) => setShowJapaneseReading(e.target.checked)}
-              className="w-4 h-4 accent-brown-dark cursor-pointer"
+              className="w-3.5 h-3.5 accent-brown-dark cursor-pointer"
             />
             {t[lang].jpToggle}
           </label>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <a
             href="https://itm-kaiwa.github.io/Random/index.html"
             title="Random Practice"
             aria-label="Random Practice"
-            className="w-9 h-9 flex items-center justify-center bg-white border border-brown text-brown text-lg rounded shadow-sm hover:bg-brown-dark hover:text-white active:scale-90 active:shadow-none transition-all"
+            className="w-7 h-7 flex items-center justify-center bg-white border border-brown text-brown text-sm rounded shadow-sm hover:bg-brown-dark hover:text-white active:scale-90 active:shadow-none transition-all"
           >
             🔗
           </a>
-          <select 
-            className="bg-white border border-brown text-brown text-sm p-1.5 rounded shadow-sm outline-none cursor-pointer font-bold hover:bg-brown-dark hover:text-white active:scale-95 transition-all"
-            value={lang} 
+          <select
+            className="bg-white border border-brown text-brown text-xs px-1.5 py-1 rounded shadow-sm outline-none cursor-pointer font-bold hover:bg-brown-dark hover:text-white active:scale-95 transition-all"
+            value={lang}
             onChange={(e) => setLang(e.target.value as Language)}
           >
             <option value="JP">日本語</option>
@@ -217,11 +216,13 @@ export default function ClockApp({ onReturn, initialLang, onLangChange }: ClockA
           </div>
         )}
 
-        <div className="min-h-[48px] w-full flex items-center justify-center text-center px-4">
-          <div className="text-2xl md:text-3xl font-bold text-brown-dark leading-tight whitespace-pre-wrap break-words">
-            {readingStr}
+        {showJapaneseReading && (
+          <div className="min-h-[48px] w-full flex items-center justify-center text-center px-4">
+            <div className="text-2xl md:text-3xl font-bold text-brown-dark leading-tight whitespace-pre-wrap break-words">
+              {readingStr}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="w-full max-w-md flex flex-col gap-2 bg-white/70 rounded-xl p-2 border border-brown-light/30 shadow-sm">
           <div>
